@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sora Louveré — Exportación & Moda Global</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Raleway:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --black:#0a0a0a;--deep:#111111;--charcoal:#1a1a1a;--card:#1e1e1e;
+  --rose:#c8a98a;--gold:#d4af6a;--champagne:#e8d5b0;--cream:#f5efe6;
+  --white:#fdfaf6;--muted:#888880;--border:rgba(212,175,106,0.18);--borderhov:rgba(212,175,106,0.5);
+}
+html{scroll-behavior:smooth;}
+body{background:var(--black);color:var(--cream);font-family:'Raleway',sans-serif;font-weight:300;overflow-x:hidden;}
+img{max-width:100%;display:block;object-fit:cover;}
+a{text-decoration:none;color:inherit;}
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-track{background:var(--black);}
+::-webkit-scrollbar-thumb{background:var(--gold);}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:1.2rem 2rem;display:flex;justify-content:space-between;align-items:center;background:linear-gradient(to bottom,rgba(10,10,10,.96) 0%,transparent 100%);transition:background .4s;}
+nav.scrolled{background:rgba(10,10,10,.97);border-bottom:1px solid var(--border);}
+.nav-logo{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:400;letter-spacing:.12em;color:var(--gold);}
+.nav-logo span{font-style:italic;color:var(--champagne);}
+.nav-links{display:flex;gap:1.8rem;list-style:none;}
+.nav-links a{font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);transition:color .3s;}
+.nav-links a:hover{color:var(--gold);}
+.nav-wa{background:var(--gold);color:var(--black);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;padding:.55rem 1.4rem;font-weight:600;transition:background .3s;}
+.nav-wa:hover{background:var(--champagne);}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;z-index:1001;}
+.hamburger span{width:24px;height:1.5px;background:var(--gold);transition:all .3s;display:block;}
+.mobile-menu{display:none;position:fixed;inset:0;background:rgba(10,10,10,.97);z-index:999;flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;}
+.mobile-menu.open{display:flex;}
+.mobile-menu a{font-family:'Playfair Display',serif;font-size:1.8rem;color:var(--cream);}
+.mobile-menu a:hover{color:var(--gold);}
+@media(max-width:900px){.nav-links,.nav-wa{display:none;}.hamburger{display:flex;}}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
+.hero-bg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=1600&q=80') center/cover no-repeat;filter:brightness(.28);}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(10,10,10,.85) 0%,rgba(30,15,5,.55) 50%,rgba(10,10,10,.8) 100%);}
+.hero-particles{position:absolute;inset:0;overflow:hidden;pointer-events:none;}
+.particle{position:absolute;width:2px;height:2px;background:var(--gold);border-radius:50%;opacity:0;animation:drift var(--d,20s) ease-in-out infinite var(--delay,0s);}
+@keyframes drift{0%{opacity:0;transform:translateY(100vh);}10%{opacity:.5;}90%{opacity:.2;}100%{opacity:0;transform:translateY(-10vh) translateX(var(--dx,30px));}}
+.hero-content{position:relative;z-index:2;text-align:center;padding:2rem;}
+.hero-badge{font-size:.6rem;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem;display:flex;align-items:center;justify-content:center;gap:1rem;}
+.hero-badge::before,.hero-badge::after{content:'';display:block;width:40px;height:1px;background:var(--gold);}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(3rem,11vw,9rem);font-weight:400;line-height:.9;color:var(--white);}
+.hero-title em{font-style:italic;color:var(--gold);display:block;}
+.hero-tagline{font-size:clamp(.75rem,1.8vw,.95rem);letter-spacing:.22em;text-transform:uppercase;color:var(--champagne);margin:2rem auto;max-width:520px;line-height:2.2;}
+.hero-btns{display:flex;gap:1.5rem;justify-content:center;flex-wrap:wrap;margin-top:2.5rem;}
+.btn-gold{background:var(--gold);color:var(--black);font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;padding:1rem 2.5rem;font-weight:600;transition:all .3s;border:2px solid var(--gold);display:inline-block;}
+.btn-gold:hover{background:transparent;color:var(--gold);}
+.btn-outline{border:1px solid rgba(212,175,106,.4);color:var(--champagne);font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;padding:1rem 2.5rem;transition:all .3s;display:inline-block;}
+.btn-outline:hover{border-color:var(--gold);color:var(--gold);}
+.hero-scroll{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.5rem;}
+.hero-scroll span{font-size:.55rem;letter-spacing:.25em;text-transform:uppercase;color:var(--muted);}
+.scroll-line{width:1px;height:50px;background:linear-gradient(to bottom,var(--gold),transparent);animation:scrolldrop 2s ease-in-out infinite;}
+@keyframes scrolldrop{0%{transform:scaleY(0);transform-origin:top;}50%{transform:scaleY(1);transform-origin:top;}51%{transform-origin:bottom;}100%{transform:scaleY(0);transform-origin:bottom;}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:none;}}
+.a1{animation:fadeUp .8s ease .2s both;}.a2{animation:fadeUp .8s ease .4s both;}.a3{animation:fadeUp .8s ease .6s both;}.a4{animation:fadeUp .8s ease .8s both;}
+
+/* SHARED */
+section{padding:6rem 2rem;}
+.container{max-width:1200px;margin:0 auto;}
+.sec-label{font-size:.58rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:.8rem;display:flex;align-items:center;gap:.8rem;}
+.sec-label::before{content:'';display:block;width:20px;height:1px;background:var(--gold);}
+.sec-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,3.2rem);font-weight:400;line-height:1.1;color:var(--white);}
+.sec-title em{font-style:italic;color:var(--gold);}
+.sec-body{font-size:.88rem;line-height:2;color:var(--muted);margin-top:1rem;}
+.reveal{opacity:0;transform:translateY(40px);transition:opacity .9s ease,transform .9s ease;}
+.reveal.vis{opacity:1;transform:none;}
+.divider{width:60px;height:1px;background:linear-gradient(to right,var(--gold),transparent);margin:1.5rem 0;}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;}
+@media(max-width:900px){.g2{grid-template-columns:1fr;gap:2.5rem;}.g3{grid-template-columns:repeat(2,1fr);}.g4{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:500px){.g3,.g4{grid-template-columns:1fr;}}
+
+/* INTRO */
+.intro-sec{background:var(--deep);}
+.intro-img{width:100%;height:520px;object-fit:cover;}
+.intro-frame{position:absolute;bottom:-20px;right:-20px;width:70%;height:70%;border:1px solid var(--border);pointer-events:none;}
+.intro-right{position:relative;}
+.stats-row{display:flex;gap:2rem;margin-top:3rem;flex-wrap:wrap;}
+.stat{border-left:2px solid var(--gold);padding-left:1.2rem;}
+.stat-n{font-family:'Playfair Display',serif;font-size:2.4rem;color:var(--gold);}
+.stat-l{font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-top:.2rem;}
+
+/* PHOTO SECTIONS */
+.photo-full{position:relative;height:70vh;overflow:hidden;}
+.photo-full img{width:100%;height:100%;object-fit:cover;transition:transform .6s;}
+.photo-full:hover img{transform:scale(1.04);}
+.photo-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,10,10,.85) 0%,transparent 50%);}
+.photo-caption{position:absolute;bottom:3rem;left:3rem;right:3rem;}
+.photo-caption h3{font-family:'Playfair Display',serif;font-size:clamp(1.5rem,3vw,2.5rem);color:var(--white);}
+.photo-caption p{font-size:.8rem;color:var(--champagne);margin-top:.5rem;letter-spacing:.1em;}
+.photo-g2{display:grid;grid-template-columns:1fr 1fr;height:60vh;}
+.photo-g3{display:grid;grid-template-columns:repeat(3,1fr);height:55vh;}
+.photo-asymm{display:grid;grid-template-columns:2fr 1fr;height:65vh;gap:4px;}
+.pg-item{position:relative;overflow:hidden;}
+.pg-item img{width:100%;height:100%;object-fit:cover;transition:transform .6s;}
+.pg-item:hover img{transform:scale(1.07);}
+.pg-label{position:absolute;bottom:1.2rem;left:1.2rem;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);background:rgba(10,10,10,.65);padding:.35rem .8rem;}
+@media(max-width:700px){.photo-g2,.photo-g3,.photo-asymm{grid-template-columns:1fr;height:auto;}.photo-g2 .pg-item,.photo-g3 .pg-item,.photo-asymm .pg-item{height:56vw;}}
+
+/* PRODUCTS */
+.products-sec{background:var(--charcoal);}
+.prod-card{background:var(--card);border:1px solid var(--border);overflow:hidden;transition:border-color .3s,transform .3s;}
+.prod-card:hover{border-color:var(--gold);transform:translateY(-6px);}
+.prod-img{height:260px;overflow:hidden;}
+.prod-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s;}
+.prod-card:hover .prod-img img{transform:scale(1.08);}
+.prod-info{padding:1.5rem;}
+.prod-cat{font-size:.55rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:.4rem;}
+.prod-name{font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--white);}
+.prod-desc{font-size:.78rem;line-height:1.8;color:var(--muted);margin-top:.5rem;}
+.prod-badge{display:inline-block;margin-top:.8rem;font-size:.55rem;letter-spacing:.15em;text-transform:uppercase;padding:.3rem .8rem;border:1px solid rgba(212,175,106,.3);color:var(--champagne);}
+
+/* COLLECTIONS */
+.coll-sec{background:var(--deep);}
+.coll-item{position:relative;overflow:hidden;cursor:pointer;}
+.coll-img{height:370px;width:100%;object-fit:cover;transition:transform .6s;}
+.coll-item:hover .coll-img{transform:scale(1.06);}
+.coll-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,10,10,.9) 0%,transparent 55%);transition:opacity .4s;}
+.coll-info{position:absolute;bottom:1.5rem;left:1.5rem;}
+.coll-info h4{font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--white);}
+.coll-info p{font-size:.65rem;color:var(--gold);letter-spacing:.15em;text-transform:uppercase;margin-top:.3rem;}
+
+/* FEATURES */
+.features-sec{background:linear-gradient(135deg,#0f0a05,#1a1008,#0a0a0a);}
+.feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:4rem;}
+.feat-item{background:var(--card);padding:2.5rem 2rem;border:1px solid var(--border);transition:border-color .3s,background .3s;}
+.feat-item:hover{border-color:var(--gold);background:#222;}
+.feat-icon{font-size:1.8rem;margin-bottom:1.2rem;}
+.feat-title{font-family:'Playfair Display',serif;font-size:1.05rem;color:var(--white);margin-bottom:.6rem;}
+.feat-desc{font-size:.78rem;line-height:1.9;color:var(--muted);}
+@media(max-width:700px){.feat-grid{grid-template-columns:1fr;}}
+
+/* QUOTE */
+.quote-banner{background:var(--gold);padding:5rem 2rem;text-align:center;}
+.quote-banner blockquote{font-family:'Playfair Display',serif;font-size:clamp(1.3rem,3.5vw,2.4rem);font-style:italic;color:var(--black);line-height:1.5;max-width:800px;margin:0 auto;}
+.quote-banner cite{display:block;margin-top:1.5rem;font-size:.65rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(10,10,10,.6);font-style:normal;}
+
+/* EXPORT */
+.export-sec{background:var(--charcoal);}
+.export-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;margin-top:4rem;}
+.export-list{list-style:none;}
+.export-list li{display:flex;align-items:center;gap:1rem;padding:1.2rem 0;border-bottom:1px solid var(--border);font-size:.85rem;color:var(--champagne);}
+.export-list li::before{content:'→';color:var(--gold);}
+.exp-cards{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+.exp-card{background:var(--card);border:1px solid var(--border);padding:1.5rem;text-align:center;transition:border-color .3s;}
+.exp-card:hover{border-color:var(--gold);}
+.exp-n{font-family:'Playfair Display',serif;font-size:2rem;color:var(--gold);}
+.exp-l{font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-top:.3rem;}
+@media(max-width:700px){.export-grid{grid-template-columns:1fr;}.exp-cards{grid-template-columns:1fr 1fr;}}
+
+/* GALLERY CAROUSEL */
+.gal-sec{background:var(--deep);padding:6rem 0;}
+.gal-header{padding:0 2rem;margin-bottom:3rem;}
+.gal-track-wrap{overflow:hidden;}
+.gal-track{display:flex;gap:1rem;transition:transform .7s cubic-bezier(.77,0,.18,1);padding:0 2rem;}
+.gal-slide{min-width:300px;height:400px;flex-shrink:0;overflow:hidden;position:relative;}
+.gal-slide img{width:100%;height:100%;object-fit:cover;transition:transform .5s;}
+.gal-slide:hover img{transform:scale(1.07);}
+.gal-label{position:absolute;bottom:1rem;left:1rem;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);background:rgba(0,0,0,.7);padding:.3rem .8rem;}
+.gal-controls{display:flex;gap:1rem;justify-content:center;margin-top:2rem;padding:0 2rem;}
+.gal-btn{width:44px;height:44px;border:1px solid rgba(212,175,106,.35);background:transparent;color:var(--gold);cursor:pointer;font-size:1rem;transition:all .3s;}
+.gal-btn:hover{background:var(--gold);color:var(--black);}
+@media(max-width:600px){.gal-slide{min-width:240px;height:300px;}}
+
+/* PROCESS */
+.process-sec{background:var(--black);}
+.p-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:4rem;}
+.p-step{padding:2rem 1.5rem;border-top:1px solid var(--border);border-right:1px solid var(--border);}
+.p-step:last-child{border-right:none;}
+.p-num{font-family:'Playfair Display',serif;font-size:4rem;color:rgba(212,175,106,.08);line-height:1;margin-bottom:1rem;}
+.p-title{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--white);margin-bottom:.7rem;}
+.p-desc{font-size:.78rem;line-height:1.9;color:var(--muted);}
+@media(max-width:700px){.p-steps{grid-template-columns:1fr 1fr;}.p-step:nth-child(2n){border-right:none;}}
+
+/* TESTIMONIALS */
+.test-sec{background:var(--charcoal);}
+.test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:4rem;}
+.test-card{background:var(--card);border:1px solid var(--border);padding:2rem;transition:border-color .3s;}
+.test-card:hover{border-color:var(--gold);}
+.test-q{font-family:'Playfair Display',serif;font-size:1rem;font-style:italic;color:var(--cream);line-height:1.7;margin-bottom:1.5rem;}
+.test-div{width:30px;height:1px;background:var(--gold);margin-bottom:1rem;}
+.test-name{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);}
+.test-role{font-size:.7rem;color:var(--muted);margin-top:.2rem;}
+@media(max-width:700px){.test-grid{grid-template-columns:1fr;}}
+
+/* VALUES */
+.commit-sec{background:var(--deep);}
+.commit-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:4rem;}
+.commit-item{background:var(--card);padding:3rem 2rem;border:1px solid var(--border);text-align:center;transition:all .3s;}
+.commit-item:hover{background:#1f1f1f;border-color:var(--gold);}
+.commit-icon{font-size:2.2rem;margin-bottom:1.2rem;}
+.commit-title{font-family:'Playfair Display',serif;font-size:1.05rem;color:var(--white);margin-bottom:.7rem;}
+.commit-desc{font-size:.78rem;line-height:1.9;color:var(--muted);}
+@media(max-width:700px){.commit-grid{grid-template-columns:1fr;}}
+
+/* FOUNDER */
+.founder-sec{background:var(--black);}
+.founder-inner{display:grid;grid-template-columns:1fr 1.2fr;gap:5rem;align-items:center;}
+.founder-img-wrap{position:relative;}
+.founder-img{width:100%;height:500px;object-fit:cover;}
+.founder-badge{position:absolute;bottom:-1.5rem;right:-1.5rem;background:var(--gold);color:var(--black);padding:1.5rem;text-align:center;width:130px;}
+.f-year{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;line-height:1;}
+.f-label{font-size:.55rem;letter-spacing:.15em;text-transform:uppercase;margin-top:.3rem;}
+.founder-name{font-family:'Playfair Display',serif;font-size:clamp(1.6rem,3vw,2.4rem);color:var(--white);margin-top:1.5rem;}
+.founder-role{font-size:.65rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-top:.5rem;}
+@media(max-width:800px){.founder-inner{grid-template-columns:1fr;gap:3rem;}.founder-img{height:350px;}}
+
+/* CTA BANNER */
+.cta-banner{position:relative;overflow:hidden;padding:8rem 2rem;text-align:center;}
+.cta-bg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1400&q=80') center/cover;filter:brightness(.18);}
+.cta-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(212,175,106,.1),transparent);}
+.cta-content{position:relative;z-index:2;}
+.cta-content h2{font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,4rem);color:var(--white);margin-bottom:1.5rem;}
+.cta-content p{font-size:.88rem;color:var(--champagne);max-width:500px;margin:0 auto 2.5rem;line-height:2;}
+
+/* CONTACT */
+.contact-sec{background:var(--charcoal);}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;}
+.c-item{display:flex;gap:1.2rem;margin-bottom:2rem;align-items:flex-start;}
+.c-icon{width:44px;height:44px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;color:var(--gold);}
+.c-text label{font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:.3rem;}
+.c-text p{font-size:.85rem;color:var(--champagne);}
+.soc-links{display:flex;flex-direction:column;gap:.8rem;margin-top:.5rem;}
+.soc-link{display:flex;align-items:center;gap:1rem;padding:.9rem 1.2rem;border:1px solid var(--border);transition:all .3s;}
+.soc-link:hover{border-color:var(--gold);background:rgba(212,175,106,.05);}
+.soc-icon{width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;}
+.soc-name{font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:var(--champagne);}
+.soc-handle{font-size:.7rem;color:var(--muted);margin-top:.12rem;}
+.wa-big{display:flex;align-items:center;justify-content:center;gap:1rem;background:#25D366;color:#fff;font-size:.75rem;letter-spacing:.18em;text-transform:uppercase;padding:1.3rem 2.5rem;font-weight:600;margin-top:2rem;transition:background .3s;width:100%;}
+.wa-big:hover{background:#1da851;}
+.wa-big svg{width:22px;height:22px;flex-shrink:0;}
+@media(max-width:800px){.contact-grid{grid-template-columns:1fr;gap:3rem;}}
+
+/* FOOTER */
+footer{background:#050505;padding:5rem 2rem 2rem;border-top:1px solid var(--border);}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;margin-bottom:4rem;}
+.f-logo{font-family:'Playfair Display',serif;font-size:2rem;color:var(--gold);letter-spacing:.1em;}
+.f-logo em{font-style:italic;color:var(--champagne);}
+.footer-brand p{font-size:.78rem;line-height:1.9;color:var(--muted);margin-top:1rem;max-width:280px;}
+.footer-col h5{font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem;}
+.footer-col ul{list-style:none;}
+.footer-col ul li{margin-bottom:.8rem;}
+.footer-col ul li a{font-size:.78rem;color:var(--muted);transition:color .3s;}
+.footer-col ul li a:hover{color:var(--gold);}
+.f-socials{display:flex;gap:.8rem;margin-top:1.5rem;}
+.f-soc{width:36px;height:36px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:.95rem;transition:all .3s;color:var(--muted);}
+.f-soc:hover{border-color:var(--gold);color:var(--gold);}
+.footer-bottom{border-top:1px solid var(--border);padding-top:1.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+.footer-copy{font-size:.65rem;color:var(--muted);}
+.footer-credits{font-size:.65rem;color:var(--muted);}
+.footer-credits a{color:var(--gold);}
+@media(max-width:900px){.footer-top{grid-template-columns:1fr 1fr;}.footer-bottom{flex-direction:column;text-align:center;}}
+@media(max-width:500px){.footer-top{grid-template-columns:1fr;}}
+
+/* FLOAT WA */
+.float-wa{position:fixed;bottom:2rem;right:2rem;z-index:900;display:flex;flex-direction:column;align-items:flex-end;gap:.6rem;}
+.float-tooltip{background:var(--black);color:var(--white);font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;padding:.5rem 1rem;border:1px solid var(--border);opacity:0;transform:translateX(10px);transition:all .3s;white-space:nowrap;}
+.float-wa:hover .float-tooltip{opacity:1;transform:translateX(0);}
+.float-btn{width:60px;height:60px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.35);transition:transform .3s,box-shadow .3s;}
+.float-btn:hover{transform:scale(1.1);box-shadow:0 6px 30px rgba(37,211,102,.55);}
+.float-btn svg{width:28px;height:28px;fill:#fff;}
+</style>
+</head>
+<body>
+
+<!-- FLOAT WA -->
+<div class="float-wa">
+  <span class="float-tooltip">WhatsApp · +51 991 269 948</span>
+  <a href="https://wa.me/51991269948" target="_blank" class="float-btn" aria-label="WhatsApp">
+    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+</div>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <a href="#" class="nav-logo">Sora <span>Louveré</span></a>
+  <ul class="nav-links">
+    <li><a href="#nosotros">Marca</a></li>
+    <li><a href="#productos">Productos</a></li>
+    <li><a href="#exportacion">Exportación</a></li>
+    <li><a href="#galeria">Galería</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+  <a href="https://wa.me/51991269948" target="_blank" class="nav-wa">WhatsApp</a>
+  <div class="hamburger" id="hb"><span></span><span></span><span></span></div>
+</nav>
+<div class="mobile-menu" id="mm">
+  <a href="#nosotros" onclick="cMM()">Marca</a>
+  <a href="#productos" onclick="cMM()">Productos</a>
+  <a href="#exportacion" onclick="cMM()">Exportación</a>
+  <a href="#galeria" onclick="cMM()">Galería</a>
+  <a href="#contacto" onclick="cMM()">Contacto</a>
+  <a href="https://wa.me/51991269948" target="_blank" class="btn-gold" style="font-size:.7rem;">💬 +51 991 269 948</a>
+</div>
+
+<!-- S1: HERO -->
+<section class="hero" id="inicio">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-particles" id="pts"></div>
+  <div class="hero-content">
+    <p class="hero-badge a1">Exportación Global · Lima, Perú</p>
+    <h1 class="hero-title a2">Sora<em>Louveré</em></h1>
+    <p class="hero-tagline a3">Moda · Peluches · Ropa Térmica · Diseño Exclusivo<br>Exportamos calidad peruana al mundo</p>
+    <div class="hero-btns a4">
+      <a href="#productos" class="btn-gold">Ver colecciones</a>
+      <a href="https://wa.me/51991269948" target="_blank" class="btn-outline">Contáctanos</a>
+    </div>
+  </div>
+  <div class="hero-scroll"><div class="scroll-line"></div><span>Scroll</span></div>
+</section>
+
+<!-- S2: INTRO -->
+<section class="intro-sec" id="nosotros">
+  <div class="container g2">
+    <div class="reveal">
+      <p class="sec-label">Quiénes somos</p>
+      <h2 class="sec-title">Una marca nacida para<br><em>conquistar</em> el mundo</h2>
+      <div class="divider"></div>
+      <p class="sec-body">Sora Louveré es una marca peruana de exportación especializada en moda, peluches artesanales y ropa térmica de calidad premium. Llevamos lo mejor del diseño peruano a cada rincón del planeta, combinando tradición, innovación y calidad incomparable.</p>
+      <p class="sec-body" style="margin-top:1rem;">Cada producto que exportamos lleva consigo la pasión y el cuidado que solo una marca con visión global puede ofrecer. Desde Lima al mundo, con orgullo peruano.</p>
+      <div class="stats-row">
+        <div class="stat"><div class="stat-n">3+</div><div class="stat-l">Líneas de productos</div></div>
+        <div class="stat"><div class="stat-n">15+</div><div class="stat-l">Países de destino</div></div>
+        <div class="stat"><div class="stat-n">100%</div><div class="stat-l">Calidad garantizada</div></div>
+      </div>
+    </div>
+    <div class="intro-right reveal" style="transition-delay:.2s;">
+      <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&q=80" alt="Sora Louveré showroom" class="intro-img">
+      <div class="intro-frame"></div>
+    </div>
+  </div>
+</section>
+
+<!-- S3: PHOTO FULL — MODA -->
+<div class="photo-full reveal">
+  <img src="https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=1600&q=80" alt="Colección moda Sora Louveré">
+  <div class="photo-overlay"></div>
+  <div class="photo-caption"><h3>Colección de Moda Premium</h3><p>Sora Louveré · Temporada 2025 · Exportación Internacional</p></div>
+</div>
+
+<!-- S4: PRODUCTS -->
+<section class="products-sec" id="productos">
+  <div class="container">
+    <div class="reveal"><p class="sec-label">Nuestras líneas</p><h2 class="sec-title">Productos de <em>exportación</em></h2></div>
+    <div class="g3" style="margin-top:3rem;">
+      <div class="prod-card reveal" style="transition-delay:.1s;">
+        <div class="prod-img"><img src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=600&q=80" alt="Ropa de moda"></div>
+        <div class="prod-info"><p class="prod-cat">Línea Principal</p><h3 class="prod-name">Ropa de Moda</h3><p class="prod-desc">Prendas de diseño exclusivo para hombre y mujer. Confeccionadas con los mejores materiales, listas para mercados internacionales con acabados impecables.</p><span class="prod-badge">Exportación activa</span></div>
+      </div>
+      <div class="prod-card reveal" style="transition-delay:.2s;">
+        <div class="prod-img"><img src="https://images.unsplash.com/photo-1559454403-b8fb88521f11?w=600&q=80" alt="Peluches artesanales"></div>
+        <div class="prod-info"><p class="prod-cat">Línea Especial</p><h3 class="prod-name">Peluches Artesanales</h3><p class="prod-desc">Peluches de alta calidad fabricados artesanalmente. Diseños únicos que conquistan mercados en Europa, Asia y América Latina. Cada pieza es única.</p><span class="prod-badge">Alta demanda</span></div>
+      </div>
+      <div class="prod-card reveal" style="transition-delay:.3s;">
+        <div class="prod-img"><img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=600&q=80" alt="Ropa térmica"></div>
+        <div class="prod-info"><p class="prod-cat">Línea Térmica</p><h3 class="prod-name">Ropa de Agua Caliente</h3><p class="prod-desc">Prendas térmicas especializadas de máxima comodidad y durabilidad. Perfectas para climas fríos en mercados europeos y norteamericanos.</p><span class="prod-badge">Temporada invierno</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- S5: PHOTO GRID 2 -->
+<div class="photo-g2 reveal">
+  <div class="pg-item"><img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=900&q=80" alt="Colección femenina"><span class="pg-label">Colección Femenina</span></div>
+  <div class="pg-item"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=900&q=80" alt="Colección masculina"><span class="pg-label">Colección Masculina</span></div>
+</div>
+
+<!-- S6: COLLECTIONS -->
+<section class="coll-sec">
+  <div class="container">
+    <div class="reveal"><p class="sec-label">Colecciones</p><h2 class="sec-title">Diseño que <em>trasciende</em> fronteras</h2></div>
+    <div class="g4" style="margin-top:3rem;">
+      <div class="coll-item reveal" style="transition-delay:.1s;"><img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=500&q=80" alt="Urban Style" class="coll-img"><div class="coll-overlay"></div><div class="coll-info"><h4>Urban Style</h4><p>Colección 2025</p></div></div>
+      <div class="coll-item reveal" style="transition-delay:.2s;"><img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=500&q=80" alt="Elegance" class="coll-img"><div class="coll-overlay"></div><div class="coll-info"><h4>Elegance</h4><p>Exportación Premium</p></div></div>
+      <div class="coll-item reveal" style="transition-delay:.3s;"><img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?w=500&q=80" alt="Casual" class="coll-img"><div class="coll-overlay"></div><div class="coll-info"><h4>Casual Comfort</h4><p>Para el mundo</p></div></div>
+      <div class="coll-item reveal" style="transition-delay:.4s;"><img src="https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=500&q=80" alt="Winter" class="coll-img"><div class="coll-overlay"></div><div class="coll-info"><h4>Winter Collection</h4><p>Línea térmica</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- S7: PHOTO FULL — PELUCHES -->
+<div class="photo-full reveal">
+  <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1600&q=80" alt="Peluches artesanales">
+  <div class="photo-overlay"></div>
+  <div class="photo-caption"><h3>Peluches Artesanales de Exportación</h3><p>Sora Louveré · Fabricados en Perú · Distribuidos en el mundo</p></div>
+</div>
+
+<!-- S8: FEATURES -->
+<section class="features-sec">
+  <div class="container">
+    <div class="reveal" style="text-align:center;"><p class="sec-label" style="justify-content:center;">Por qué elegirnos</p><h2 class="sec-title" style="text-align:center;">La ventaja <em>Sora Louveré</em></h2></div>
+    <div class="feat-grid">
+      <div class="feat-item reveal" style="transition-delay:.1s;"><div class="feat-icon">🌍</div><h3 class="feat-title">Presencia Global</h3><p class="feat-desc">Exportamos a más de 15 países en América, Europa y Asia. Nuestra red logística garantiza entregas seguras y a tiempo en cualquier mercado del mundo.</p></div>
+      <div class="feat-item reveal" style="transition-delay:.2s;"><div class="feat-icon">✨</div><h3 class="feat-title">Calidad Premium</h3><p class="feat-desc">Cada producto pasa por estrictos controles de calidad. Solo lo mejor lleva la etiqueta Sora Louveré: prendas, peluches y ropa térmica de primer nivel.</p></div>
+      <div class="feat-item reveal" style="transition-delay:.3s;"><div class="feat-icon">🤝</div><h3 class="feat-title">Trato Personalizado</h3><p class="feat-desc">Trabajamos directamente con cada cliente. Ofrecemos pedidos personalizados, muestras previas, catálogos exclusivos y soporte postventa completo.</p></div>
+      <div class="feat-item reveal" style="transition-delay:.1s;"><div class="feat-icon">🚀</div><h3 class="feat-title">Despacho Rápido</h3><p class="feat-desc">Alianzas con operadores logísticos internacionales. Tiempos de entrega competitivos y documentación de exportación completa para cada pedido.</p></div>
+      <div class="feat-item reveal" style="transition-delay:.2s;"><div class="feat-icon">🎨</div><h3 class="feat-title">Diseño Exclusivo</h3><p class="feat-desc">Cada colección es una declaración de estilo global con identidad peruana. Diseños únicos que no encontrarás en ningún otro lugar del mundo.</p></div>
+      <div class="feat-item reveal" style="transition-delay:.3s;"><div class="feat-icon">💎</div><h3 class="feat-title">Precios Competitivos</h3><p class="feat-desc">Calidad de Sora Louveré a precios que permiten márgenes reales para importadores y distribuidores en todo el planeta.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- S9: PHOTO GRID 3 -->
+<div class="photo-g3 reveal">
+  <div class="pg-item"><img src="https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=600&q=80" alt="Diseño"><span class="pg-label">Diseño exclusivo</span></div>
+  <div class="pg-item"><img src="https://images.unsplash.com/photo-1583744946564-b52ac1c389c8?w=600&q=80" alt="Peluches"><span class="pg-label">Peluches premium</span></div>
+  <div class="pg-item"><img src="https://images.unsplash.com/photo-1545454675-3531b543be5d?w=600&q=80" alt="Térmica"><span class="pg-label">Línea térmica</span></div>
+</div>
+
+<!-- S10: EXPORT -->
+<section class="export-sec" id="exportacion">
+  <div class="container">
+    <div class="reveal"><p class="sec-label">Mercados internacionales</p><h2 class="sec-title">Exportamos <em>excelencia</em> al mundo</h2><p class="sec-body" style="max-width:560px;">Sora Louveré opera con estándares internacionales. Trabajamos con agentes aduaneros certificados y documentación completa para cada envío a cualquier destino.</p></div>
+    <div class="export-grid">
+      <ul class="export-list reveal" style="transition-delay:.2s;">
+        <li>Ropa de moda para hombre y mujer</li>
+        <li>Peluches artesanales de colección</li>
+        <li>Ropa térmica y de agua caliente</li>
+        <li>Accesorios y complementos de moda</li>
+        <li>Prendas de temporada especial</li>
+        <li>Pedidos corporativos y al por mayor</li>
+        <li>Líneas personalizadas bajo pedido</li>
+        <li>Colecciones edición limitada</li>
+      </ul>
+      <div class="exp-cards reveal" style="transition-delay:.3s;">
+        <div class="exp-card"><div class="exp-n">15+</div><div class="exp-l">Países de destino</div></div>
+        <div class="exp-card"><div class="exp-n">3</div><div class="exp-l">Líneas de producto</div></div>
+        <div class="exp-card"><div class="exp-n">100%</div><div class="exp-l">Calidad garantizada</div></div>
+        <div class="exp-card"><div class="exp-n">24h</div><div class="exp-l">Tiempo de respuesta</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- S11: QUOTE -->
+<div class="quote-banner reveal">
+  <blockquote>"Sora Louveré no es solo una marca — es la promesa de que lo hecho en Perú puede conquistar cualquier mercado del mundo."</blockquote>
+  <cite>José Manuel Gastulo Calle · CEO & Fundador, Sora Louveré</cite>
+</div>
+
+<!-- S12: GALLERY CAROUSEL -->
+<section class="gal-sec" id="galeria">
+  <div class="gal-header reveal"><p class="sec-label">Galería de productos</p><h2 class="sec-title">Nuestra <em>colección</em> en imágenes</h2></div>
+  <div class="gal-track-wrap">
+    <div class="gal-track" id="galTrack">
+      <div class="gal-slide"><img src="https://images.unsplash.com/photo-1485230895905-ec40ba36b9bc?w=600&q=80" alt="Moda femenina"><span class="gal-label">Moda Femenina</span></div>
+      <div class="gal-slide"><img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=600&q=80" alt="Urban Style"><span class="gal-label">Urban Style</span></div>
+      <div class="gal-slide"><img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=600&q=80" alt="Diseño exclusivo"><span class="gal-label">Diseño Exclusivo</span></div>
+      <div class="gal-slide"><img src="https://images.unsplash.com/photo-1518459031867-a89b944bffe4?w=600&q=80" alt="Peluches"><span class="gal-label">Peluches</span></div>
+      <div class="gal-slide"><img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?w=600&q=80" alt="Ropa termica"><span class="gal-label">Línea Térmica</span></div>
+      <div class="gal-slide"><img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=600&q=80" alt="Colección premium"><span class="gal-label">Colección Premium</span></div>
+      <div class="gal-slide"><img src="https://images.unsplash.com/photo-1571513722275-4b41940f54b8?w=600&q=80" alt="Accesorios"><span class="gal-label">Accesorios</span></div>
+      <div class="gal-slide"><img src="https://images.unsplash.com/photo-1550614000-4895a10e1bfd?w=600&q=80" alt="Exportacion"><span class="gal-label">Exportación global</span></div>
+      <div class="gal-slide"><img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=600&q=80" alt="Look femenino"><span class="gal-label">Look Femenino</span></div>
+      <div class="gal-slide"><img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600&q=80" alt="Estilo urbano"><span class="gal-label">Estilo Urbano</span></div>
+    </div>
+  </div>
+  <div class="gal-controls">
+    <button class="gal-btn" id="galPrev">&#8592;</button>
+    <button class="gal-btn" id="galNext">&#8594;</button>
+  </div>
+</section>
+
+<!-- S13: PHOTO ASYMM -->
+<div class="photo-asymm reveal">
+  <div class="pg-item"><img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=900&q=80" alt="Colección estrella"><span class="pg-label">Colección estrella Sora Louveré</span></div>
+  <div class="pg-item"><img src="https://images.unsplash.com/photo-1571513722275-4b41940f54b8?w=600&q=80" alt="Detalle"><span class="pg-label">Detalle artesanal</span></div>
+</div>
+
+<!-- S14: PROCESS -->
+<section class="process-sec">
+  <div class="container">
+    <div class="reveal" style="text-align:center;"><p class="sec-label" style="justify-content:center;">Cómo trabajamos</p><h2 class="sec-title" style="text-align:center;">Del diseño a tu <em>destino</em></h2></div>
+    <div class="p-steps reveal" style="transition-delay:.2s;">
+      <div class="p-step"><div class="p-num">01</div><h4 class="p-title">Diseño & Creación</h4><p class="p-desc">Nuestro equipo diseña cada producto con atención total al detalle. Desde bocetos hasta muestras físicas aprobadas para exportación.</p></div>
+      <div class="p-step"><div class="p-num">02</div><h4 class="p-title">Control de Calidad</h4><p class="p-desc">Revisión exhaustiva de cada pieza. Solo los productos que pasan nuestros estándares llevan la etiqueta Sora Louveré con orgullo.</p></div>
+      <div class="p-step"><div class="p-num">03</div><h4 class="p-title">Documentación</h4><p class="p-desc">Gestionamos toda la documentación: facturas comerciales, packing list, certificados de origen y permisos de exportación completos.</p></div>
+      <div class="p-step"><div class="p-num">04</div><h4 class="p-title">Envío Internacional</h4><p class="p-desc">Coordinamos el despacho con aliados logísticos para garantizar entregas seguras y a tiempo en cualquier parte del mundo.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- S15: PHOTO FULL — EXPORT -->
+<div class="photo-full reveal">
+  <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=1600&q=80" alt="Exportación global">
+  <div class="photo-overlay"></div>
+  <div class="photo-caption"><h3>Exportando el talento peruano al mundo</h3><p>Sora Louveré · Lima, Perú · Distribución internacional en más de 15 países</p></div>
+</div>
+
+<!-- S16: VALUES -->
+<section class="commit-sec">
+  <div class="container">
+    <div class="reveal" style="text-align:center;"><p class="sec-label" style="justify-content:center;">Nuestros valores</p><h2 class="sec-title" style="text-align:center;">Lo que nos <em>define</em></h2></div>
+    <div class="commit-grid">
+      <div class="commit-item reveal" style="transition-delay:.1s;"><div class="commit-icon">🌱</div><h3 class="commit-title">Sostenibilidad</h3><p class="commit-desc">Producción responsable con materiales sostenibles. Respetamos el medio ambiente y apoyamos a las comunidades locales en cada paso del proceso.</p></div>
+      <div class="commit-item reveal" style="transition-delay:.2s;"><div class="commit-icon">🏆</div><h3 class="commit-title">Excelencia</h3><p class="commit-desc">No aceptamos menos que lo mejor. Cada producto es una declaración de calidad. La excelencia es el estándar mínimo en Sora Louveré.</p></div>
+      <div class="commit-item reveal" style="transition-delay:.3s;"><div class="commit-icon">❤️</div><h3 class="commit-title">Pasión Peruana</h3><p class="commit-desc">Llevamos el orgullo del Perú en cada costura, cada peluche, cada prenda que viaja al mundo con nuestra marca y nuestra bandera.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- S17: PHOTO GRID 3 -->
+<div class="photo-g3 reveal">
+  <div class="pg-item"><img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=600&q=80" alt="Elegance"><span class="pg-label">Elegance line</span></div>
+  <div class="pg-item"><img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?w=600&q=80" alt="Casual"><span class="pg-label">Casual comfort</span></div>
+  <div class="pg-item"><img src="https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=600&q=80" alt="Winter"><span class="pg-label">Winter collection</span></div>
+</div>
+
+<!-- S18: TESTIMONIALS -->
+<section class="test-sec">
+  <div class="container">
+    <div class="reveal" style="text-align:center;"><p class="sec-label" style="justify-content:center;">Lo que dicen nuestros clientes</p><h2 class="sec-title" style="text-align:center;">Clientes que <em>confían</em> en Sora Louveré</h2></div>
+    <div class="test-grid">
+      <div class="test-card reveal" style="transition-delay:.1s;"><p class="test-q">"Los peluches de Sora Louveré son increíbles. La calidad superó todas nuestras expectativas. Son los mejores proveedores con los que hemos trabajado."</p><div class="test-div"></div><p class="test-name">María García</p><p class="test-role">Importadora · España</p></div>
+      <div class="test-card reveal" style="transition-delay:.2s;"><p class="test-q">"Trabajar con Sora Louveré ha sido una experiencia excepcional. Su ropa térmica se vende sola en nuestros mercados de invierno. Los recomiendo al 100%."</p><div class="test-div"></div><p class="test-name">Carlos Mendez</p><p class="test-role">Distribuidor · Chile</p></div>
+      <div class="test-card reveal" style="transition-delay:.3s;"><p class="test-q">"La atención es personalizada, los precios son justos y la calidad es constante. Exactamente lo que necesitamos de un proveedor de exportación confiable."</p><div class="test-div"></div><p class="test-name">Ana Rodríguez</p><p class="test-role">Compradora · México</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- S19: MORE PHOTOS GRID -->
+<div class="photo-g2 reveal">
+  <div class="pg-item"><img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=900&q=80" alt="Moda sora"><span class="pg-label">Nueva temporada</span></div>
+  <div class="pg-item"><img src="https://images.unsplash.com/photo-1485230895905-ec40ba36b9bc?w=900&q=80" alt="Colección"><span class="pg-label">Colección exclusiva</span></div>
+</div>
+
+<!-- S20: FOUNDER -->
+<section class="founder-sec">
+  <div class="container">
+    <div class="founder-inner">
+      <div class="founder-img-wrap reveal">
+        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80" alt="José Manuel Gastulo Calle" class="founder-img">
+        <div class="founder-badge"><div class="f-year">CEO</div><div class="f-label">& Fundador</div></div>
+      </div>
+      <div class="reveal" style="transition-delay:.2s;">
+        <p class="sec-label">El fundador</p>
+        <h2 class="sec-title">José Manuel<br><em>Gastulo Calle</em></h2>
+        <div class="divider"></div>
+        <p class="sec-body">Fundador y CEO de Sora Louveré, José Manuel Gastulo Calle es el visionario detrás de una marca que lleva el talento y la calidad peruana al mundo entero con pasión y determinación.</p>
+        <p class="sec-body" style="margin-top:1rem;">Su amor por la moda, los productos artesanales y el comercio internacional lo llevó a crear una empresa que hoy exporta con orgullo desde Lima, Perú, hacia mercados de todo el mundo.</p>
+        <p class="sec-body" style="margin-top:1rem;">Con visión clara y compromiso inquebrantable, José Manuel construye cada día la marca que siempre soñó: una que represente lo mejor del Perú ante el mundo.</p>
+        <div style="display:flex;gap:1rem;margin-top:2rem;flex-wrap:wrap;">
+          <a href="https://www.instagram.com/josemanuel_212007?igsh=MXdodmN4ZG90c3Y4bA==" target="_blank" class="btn-outline" style="font-size:.62rem;padding:.7rem 1.5rem;">Instagram</a>
+          <a href="https://www.linkedin.com/in/jose-manuel-gastulo-calle-59b908370" target="_blank" class="btn-outline" style="font-size:.62rem;padding:.7rem 1.5rem;">LinkedIn</a>
+          <a href="https://wa.me/51991269948" target="_blank" class="btn-gold" style="font-size:.62rem;padding:.7rem 1.5rem;">WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- S21: PHOTO FULL — FINAL -->
+<div class="photo-full reveal">
+  <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=1600&q=80" alt="Sora Louveré brand">
+  <div class="photo-overlay"></div>
+  <div class="photo-caption"><h3>Sora Louveré — La marca que conquista fronteras</h3><p>Moda · Peluches · Ropa Térmica · Lima, Perú</p></div>
+</div>
+
+<!-- S22: CTA -->
+<div class="cta-banner reveal">
+  <div class="cta-bg"></div>
+  <div class="cta-overlay"></div>
+  <div class="cta-content">
+    <h2>¿Listo para <em style="font-style:italic;color:var(--gold);">importar</em> con nosotros?</h2>
+    <p>Escríbenos por WhatsApp y recibe atención personalizada de nuestro equipo. Muestras, catálogos y cotizaciones disponibles de inmediato.</p>
+    <div style="display:flex;gap:1.5rem;justify-content:center;flex-wrap:wrap;">
+      <a href="https://wa.me/51991269948" target="_blank" class="btn-gold">💬 WhatsApp: +51 991 269 948</a>
+      <a href="https://chat.whatsapp.com/IycH7p4l32oCvHkhAcsgFL?mode=gi_t" target="_blank" class="btn-outline">Unirse al grupo</a>
+    </div>
+  </div>
+</div>
+
+<!-- S23: CONTACT -->
+<section class="contact-sec" id="contacto">
+  <div class="container">
+    <div class="reveal" style="text-align:center;margin-bottom:4rem;"><p class="sec-label" style="justify-content:center;">Contacto directo</p><h2 class="sec-title" style="text-align:center;">Hablemos de <em>negocios</em></h2></div>
+    <div class="contact-grid">
+      <div class="reveal">
+        <div class="c-item"><div class="c-icon">📱</div><div class="c-text"><label>WhatsApp directo</label><p>+51 991 269 948</p></div></div>
+        <div class="c-item"><div class="c-icon">📦</div><div class="c-text"><label>Especialidad</label><p>Exportación de moda, peluches y ropa térmica</p></div></div>
+        <div class="c-item"><div class="c-icon">🌎</div><div class="c-text"><label>Origen</label><p>Lima, Perú — Distribución internacional global</p></div></div>
+        <a href="https://wa.me/51991269948" target="_blank" class="wa-big">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Chatear ahora · +51 991 269 948
+        </a>
+      </div>
+      <div class="reveal" style="transition-delay:.2s;">
+        <p style="font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem;">Redes sociales</p>
+        <div class="soc-links">
+          <a href="https://www.instagram.com/josemanuel_212007?igsh=MXdodmN4ZG90c3Y4bA==" target="_blank" class="soc-link"><div class="soc-icon">📸</div><div><div class="soc-name">Instagram</div><div class="soc-handle">@josemanuel_212007</div></div></a>
+          <a href="https://www.facebook.com/share/1DVpHk2BbK/" target="_blank" class="soc-link"><div class="soc-icon">👤</div><div><div class="soc-name">Facebook</div><div class="soc-handle">Sora Louveré en Facebook</div></div></a>
+          <a href="https://www.linkedin.com/in/jose-manuel-gastulo-calle-59b908370" target="_blank" class="soc-link"><div class="soc-icon">💼</div><div><div class="soc-name">LinkedIn</div><div class="soc-handle">José Manuel Gastulo Calle</div></div></a>
+          <a href="https://www.tiktok.com/@josemanuel21_2007" target="_blank" class="soc-link"><div class="soc-icon">🎵</div><div><div class="soc-name">TikTok</div><div class="soc-handle">@josemanuel21_2007</div></div></a>
+          <a href="https://chat.whatsapp.com/IycH7p4l32oCvHkhAcsgFL?mode=gi_t" target="_blank" class="soc-link"><div class="soc-icon">💬</div><div><div class="soc-name">Grupo WhatsApp</div><div class="soc-handle">Únete a nuestra comunidad</div></div></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="f-logo">Sora <em>Louveré</em></div>
+        <p>Marca peruana de exportación especializada en moda, peluches artesanales y ropa térmica. Llevamos la calidad del Perú al mundo entero con orgullo y excelencia desde Lima.</p>
+        <div class="f-socials">
+          <a href="https://www.instagram.com/josemanuel_212007?igsh=MXdodmN4ZG90c3Y4bA==" target="_blank" class="f-soc" title="Instagram">📸</a>
+          <a href="https://www.facebook.com/share/1DVpHk2BbK/" target="_blank" class="f-soc" title="Facebook">👤</a>
+          <a href="https://www.linkedin.com/in/jose-manuel-gastulo-calle-59b908370" target="_blank" class="f-soc" title="LinkedIn">💼</a>
+          <a href="https://www.tiktok.com/@josemanuel21_2007" target="_blank" class="f-soc" title="TikTok">🎵</a>
+          <a href="https://wa.me/51991269948" target="_blank" class="f-soc" title="WhatsApp">💬</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h5>Productos</h5>
+        <ul>
+          <li><a href="#productos">Ropa de moda</a></li>
+          <li><a href="#productos">Peluches artesanales</a></li>
+          <li><a href="#productos">Ropa térmica</a></li>
+          <li><a href="#productos">Accesorios</a></li>
+          <li><a href="#productos">Ediciones limitadas</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Empresa</h5>
+        <ul>
+          <li><a href="#nosotros">Nuestra historia</a></li>
+          <li><a href="#exportacion">Exportación</a></li>
+          <li><a href="#galeria">Galería</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Contacto</h5>
+        <ul>
+          <li><a href="https://wa.me/51991269948" target="_blank">+51 991 269 948</a></li>
+          <li><a href="https://chat.whatsapp.com/IycH7p4l32oCvHkhAcsgFL" target="_blank">Grupo WhatsApp</a></li>
+          <li><a href="https://www.instagram.com/josemanuel_212007" target="_blank">Instagram</a></li>
+          <li><a href="https://www.tiktok.com/@josemanuel21_2007" target="_blank">TikTok</a></li>
+          <li><a href="https://www.facebook.com/share/1DVpHk2BbK/" target="_blank">Facebook</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2025 Sora Louveré · Lima, Perú · Todos los derechos reservados</p>
+      <p class="footer-credits">
+        Hecho con ❤️ por el CEO de Sora Louveré —
+        <a href="https://www.linkedin.com/in/jose-manuel-gastulo-calle-59b908370" target="_blank">José Manuel Gastulo Calle</a>
+        &nbsp;·&nbsp;
+        <a href="https://www.instagram.com/josemanuel_212007" target="_blank">Instagram</a>
+        &nbsp;·&nbsp;
+        <a href="https://www.facebook.com/share/1DVpHk2BbK/" target="_blank">Facebook</a>
+        &nbsp;·&nbsp;
+        <a href="https://www.tiktok.com/@josemanuel21_2007" target="_blank">TikTok</a>
+        &nbsp;·&nbsp;
+        <a href="https://www.linkedin.com/in/jose-manuel-gastulo-calle-59b908370" target="_blank">LinkedIn</a>
+      </p>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Nav scroll
+window.addEventListener('scroll',()=>document.getElementById('mainNav').classList.toggle('scrolled',scrollY>60));
+// Hamburger
+document.getElementById('hb').addEventListener('click',()=>document.getElementById('mm').classList.toggle('open'));
+function cMM(){document.getElementById('mm').classList.remove('open');}
+// Particles
+const pts=document.getElementById('pts');
+for(let i=0;i<28;i++){const p=document.createElement('div');p.className='particle';p.style.cssText=`left:${Math.random()*100}%;--d:${15+Math.random()*20}s;--delay:${Math.random()*15}s;--dx:${(Math.random()-.5)*100}px;`;pts.appendChild(p);}
+// Gallery
+const gt=document.getElementById('galTrack');
+const gSlides=gt.querySelectorAll('.gal-slide');
+let gPos=0;
+const sw=()=>gSlides[0].offsetWidth+16;
+document.getElementById('galNext').addEventListener('click',()=>{if(gPos<gSlides.length-1){gPos++;gt.style.transform=`translateX(-${gPos*sw()}px)`;}});
+document.getElementById('galPrev').addEventListener('click',()=>{if(gPos>0){gPos--;gt.style.transform=`translateX(-${gPos*sw()}px)`;}});
+let gsx=0;
+gt.addEventListener('touchstart',e=>{gsx=e.touches[0].clientX;},{passive:true});
+gt.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-gsx;if(Math.abs(dx)>50){if(dx<0&&gPos<gSlides.length-1)gPos++;else if(dx>0&&gPos>0)gPos--;gt.style.transform=`translateX(-${gPos*sw()}px)`;}});
+// Reveal
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');obs.unobserve(e.target);}});},{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
